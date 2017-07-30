@@ -44,9 +44,9 @@ public class Ex01 {
 			}
 			
 			else if(cmd.equalsIgnoreCase("q")) {
+				System.out.println("Terminated!");
 				quit = true;
 				System.exit(-1);
-				System.out.println("Terminated!");
 			}
 			
 		}
