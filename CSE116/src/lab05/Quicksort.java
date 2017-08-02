@@ -1,18 +1,42 @@
 package lab05;
 
 public class Quicksort {
-	public static int partition(double[] unsorted, int low, int high) {
-		double pivot = unsorted[high];
-		while(low < high && low > unsorted[high]) {
+	
+	public static int partition(double[] ArrayToBeSorted, int low, int high) {
+		double pivot = ArrayToBeSorted[high];
+		while(low < high && low > ArrayToBeSorted[high]) {
 			high--;
-			unsorted[high] = unsorted[low];
+			ArrayToBeSorted[high] = ArrayToBeSorted[low];
 		}
-		while(low < high && low <= unsorted[low]) {
+		while(low < high && low <= ArrayToBeSorted[low]) {
 			low--;
-			unsorted[low] = unsorted[high];
+			ArrayToBeSorted[low] = ArrayToBeSorted[high];
 		}
-		unsorted[low] = pivot;
+		ArrayToBeSorted[low] = pivot;
 		return low;
-		
+	}
+	
+	public static void sort(double[] ArrayToBeSorted, int low, int high) {
+		int loc = 1;
+		if(low < high) {
+			loc = partition(ArrayToBeSorted, low, high);
+			sort(ArrayToBeSorted, low, loc-1);
+			sort(ArrayToBeSorted, loc+1, high);
+		}
+	}
+	
+	public static void main(String[] args) {
+		double ArrayToBeSorted[] = new double[10000];
+		for (int i = 0; i < 10000; ++i)
+		{
+			ArrayToBeSorted[i] = Math.random( );
+		}
+		int length = ArrayToBeSorted.length;
+		Quicksort qs = new Quicksort();
+		long time1 = System.nanoTime();
+		qs.sort(ArrayToBeSorted, 1, length-1);
+		long elapsed = System.nanoTime() - time1;
+		long result = elapsed/1000000;
+		System.out.println("Elapsed time: "+ result + " milliseconds");
 	}
 }
