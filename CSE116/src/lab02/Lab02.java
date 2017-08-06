@@ -1,4 +1,4 @@
-package Exercise;
+package lab02;
 import java.io.*;
 import javax.swing.JOptionPane;
 

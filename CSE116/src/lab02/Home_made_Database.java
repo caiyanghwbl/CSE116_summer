@@ -18,15 +18,17 @@ public class Home_made_Database {
 	static String date = "";
 	static int idnum;
 	static int skill_level;
+	static String skill_level1;
+	static String idnum1;
 
-	public static boolean isInteger(String idint) {
-		Pattern pattern = Pattern.compile("^[-\\+]?[\\d]*$");
-		return pattern.matcher(idint).matches();
-	}
+//	public static boolean isInteger(String idint) {
+//		Pattern pattern = Pattern.compile("^[-\\+]?[\\d]*$");
+//		return pattern.matcher(idint).matches();
+//	}
 
-	public void idException() {
-
-	}
+//	public void idException() {
+//
+//	}
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		File loc = new File("H:\\DataFile.txt");
@@ -56,14 +58,14 @@ public class Home_made_Database {
 
 					if (idnum < 1 || idnum > 20) {
 						JOptionPane.showMessageDialog(null, "Please enter a value between 1 and 20!");
-						// idinput = JOptionPane.showInputDialog(null, "Please enter ID number(1-20):
-						// ");
 					} else {
+						idnum1 = String.format("%5s", idnum);
 						break;
 					}
 				}
 				// assert Description.length() == RECORD_LENGTH;
 
+				
 				player_name = JOptionPane.showInputDialog(null, "Please enter player's name: ");
 				if (player_name == null || player_name == "") {
 					JOptionPane.showMessageDialog(null, "Player's name cannot be null");
@@ -71,11 +73,15 @@ public class Home_made_Database {
 				if (player_name.length() > 26) {
 					player_name = player_name.substring(0, 26);
 				}
-
+				String player_name1 = String.format("%26s", player_name);
+				
+				
 				team_name = JOptionPane.showInputDialog(null, "Please enter a team name: ");
 				if (team_name.length() > 26) {
 					team_name = team_name.substring(0, 26);
 				}
+				String team_name1 = String.format("%26s", team_name);
+				
 				while (true) {
 					skill_level_input = JOptionPane.showInputDialog(null, "Please enter skill level(0-99): ");
 					try {
@@ -87,6 +93,7 @@ public class Home_made_Database {
 					if (skill_level < 0 || skill_level > 99) {
 						JOptionPane.showMessageDialog(null, "Invaild input");
 					} else {
+						skill_level1 = String.format("%5s", skill_level);
 						break;
 					}
 				}
@@ -95,15 +102,15 @@ public class Home_made_Database {
 				if (date.length() > 26) {
 					date = date.substring(0, 9);
 				}
+				String date1 = String.format("%9s", date);
 
 				if (recLocation == 0) {
 					recLocation = 1;
 				}
 
-				// String record = String.format("%1$"+5+"s", idnum, player_name, team_name,
-				// skill_level, date);
-				String record = idnum + player_name + team_name + skill_level + date;
-				store.seek((RECORD_LENGTH + 2) * (recLocation - 1));
+
+				String record = idnum1 + player_name1 + team_name1 + skill_level1 + date1;
+				store.seek(RECORD_LENGTH * (recLocation - 1));
 				store.writeUTF(record);
 			}
 
@@ -124,7 +131,7 @@ public class Home_made_Database {
 					}
 				}
 
-				store.seek((RECORD_LENGTH + 2) * (idnum - 1));
+				store.seek(RECORD_LENGTH * (idnum - 1));
 				Description = store.readUTF();
 				JOptionPane.showMessageDialog(null, Description);
 

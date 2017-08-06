@@ -1,4 +1,4 @@
-package Exercise;
+package lab02;
 
 import java.io.*;
 import javax.swing.JOptionPane;
@@ -10,7 +10,7 @@ public class Lab02_demo {
 	final private static int RECORD_LENGTH = 16;
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
-		File loc = new File("H:\\01_IT219_Java02\\week02\\demo\\demoDataFile.txt");
+		File loc = new File("H:\\DataFile.txt");
 		RandomAccessFile store = new RandomAccessFile(loc, "rw");
 		String Dummy = "abcdefghijklmnop";
 		for (int i = 0; i < MAX_RECORD_NUMBER; ++i) {
