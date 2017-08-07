@@ -3,7 +3,7 @@ import javax.swing.JOptionPane;
 
 public class demo 
 {
-	private static double PI = 3.14159265;
+	private static double PI = Math.PI;
 	
 	public static void main(String [] args)
 	{

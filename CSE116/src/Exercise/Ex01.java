@@ -3,8 +3,9 @@ package Exercise;
 import java.util.*;
 
 public class Ex01 {
+	static Scanner scanner = new Scanner(System.in);
+
 	public static void main(String[] args) throws Exception {
-		Scanner scanner = new Scanner(System.in);
 		boolean quit = false;
 		int A = 0;
 		int B = 0;
@@ -13,47 +14,56 @@ public class Ex01 {
 			System.out.println("B – Enter value for side B");
 			System.out.println("C – Calculate");
 			System.out.println("Q – Exit");
-			System.out.println("Please enter a command: ");
+			System.out.println("Please Enter a Command: ");
 			String cmd = scanner.next();
-			
-			if(cmd.equalsIgnoreCase("a")) {
+
+			if (cmd.equalsIgnoreCase("a")) {
 				try {
-					System.out.println("Please enter a positive number");
+					System.out.println("Please enter a POSITIVE number");
 					A = scanner.nextInt();
+				} catch (InputMismatchException ex) {
+					System.out.println("Please enter a VALID number!");
 				}
-				catch(NumberFormatException ex){
-					throw new Exception("Invalid Input",ex);
+				if (A < 0) {
+					System.out.println("Please enter a POSITIVE number!");
 				}
 			}
-			
-			else if(cmd.equalsIgnoreCase("b")) {
+
+			if (cmd.equalsIgnoreCase("b")) {
 				try {
-					System.out.println("Please enter a positive number");
+					System.out.println("Please enter a POSITIVE number");
 					B = scanner.nextInt();
+				} catch (Exception ex) {
+					System.out.println("Please enter a VALID number!");
 				}
-				catch(Exception ex){
-					System.out.println("Please enter a valid number!");
+				if (B < 0) {
+					System.out.println("Please enter a POSITIVE number!");
 				}
 			}
-			
-			else if(cmd.equalsIgnoreCase("C")) {
-				double ans = hypo(A,B);
-				System.out.println(ans);
+
+			else if (cmd.equalsIgnoreCase("C")) {
+				if (A == 0 || B == 0) {
+					System.out.println("Invalid Result!");
+				} else {
+					double ans = hypo(A, B);
+					System.out.println(ans);
+				}
 				A = 0;
 				B = 0;
 			}
-			
-			else if(cmd.equalsIgnoreCase("q")) {
+
+			else if (cmd.equalsIgnoreCase("q")) {
 				System.out.println("Terminated!");
 				quit = true;
 				System.exit(-1);
 			}
-			
+
 		}
 	}
+
 	public static double hypo(double A, double B) {
 		double ans = 0;
-		ans = Math.sqrt(A*A + B*B);
+		ans = Math.sqrt(A * A + B * B);
 		return ans;
 	}
 }
