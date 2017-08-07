@@ -1,8 +1,9 @@
 package lab05_2;
 
 public class node {
-	node left, right;
-	int value;
+	node left;
+	node right;
+	long value;
 	
 	public node() {
 		left = null;
@@ -10,7 +11,7 @@ public class node {
 		value = 0;
 	}
 	
-	public node(int value) {
+	public node(long value) {
 		left = null;
 		right = null;
 		this.value = value;
@@ -36,7 +37,7 @@ public class node {
 		this.value = value;
 	}
 	
-	public int getValue() {
+	public long getValue() {
 		return this.value;
 	}
 }
