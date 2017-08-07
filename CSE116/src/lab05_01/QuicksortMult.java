@@ -1,7 +1,6 @@
 package lab05_01;
 
 public class QuicksortMult extends Thread{
-	public static int thread_num = Runtime.getRuntime().availableProcessors();
 	double ArrayToBeSorted[];
 	int low;
 	int high;

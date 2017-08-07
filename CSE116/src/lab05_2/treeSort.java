@@ -17,9 +17,22 @@ public class treeSort {
 			_size = _size + 1;
 			return true;
 		}
-		else {
-			return false;
+		root = currentIndex;
+		
+		while(true) {
+			parent = root;
+			if(value == currentIndex.value) {
+				return false;
+				currentIndex = currentIndex.left;
+			}
+			
+			else if(value < currentIndex.value) {
+				
+			}
 		}
+//		else {
+//			return false;
+//		}
 	}
 	
 	public long[] retrieve(){

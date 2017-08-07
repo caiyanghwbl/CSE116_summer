@@ -25,6 +25,7 @@ public class Quicksort {
 		}
 	}
 	
+	@SuppressWarnings("static-access")
 	public static void main(String[] args) {
 		double ArrayToBeSorted[] = new double[10000];
 		for (int i = 0; i < 10000; ++i)

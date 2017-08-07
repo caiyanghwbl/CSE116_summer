@@ -21,15 +21,6 @@ public class Home_made_Database {
 	static String skill_level1;
 	static String idnum1;
 
-//	public static boolean isInteger(String idint) {
-//		Pattern pattern = Pattern.compile("^[-\\+]?[\\d]*$");
-//		return pattern.matcher(idint).matches();
-//	}
-
-//	public void idException() {
-//
-//	}
-
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		File loc = new File("H:\\DataFile.txt");
 		RandomAccessFile store = new RandomAccessFile(loc, "rw");
@@ -104,8 +95,8 @@ public class Home_made_Database {
 				}
 				String date1 = String.format("%9s", date);
 
-				if (recLocation == 0) {
-					recLocation = 1;
+				if (idnum == 0) {
+					idnum = 1;
 				}
 
 
@@ -117,10 +108,12 @@ public class Home_made_Database {
 			if (cmd.compareToIgnoreCase("old") == 0) {
 
 				while (true) {
-					where = JOptionPane.showInputDialog(null, "Enter a record number:");
-
 					try {
-						idnum = Integer.parseInt(idinput);
+					where = JOptionPane.showInputDialog(null, "Enter a record number:");
+					idnum = Integer.parseInt(idinput);
+					store.seek(RECORD_LENGTH * (idnum - 1));
+					Description = store.readUTF();
+					JOptionPane.showMessageDialog(null, Description);
 					} catch (NumberFormatException ex) {
 						idnum = 0;
 					}
@@ -131,9 +124,7 @@ public class Home_made_Database {
 					}
 				}
 
-				store.seek(RECORD_LENGTH * (idnum - 1));
-				Description = store.readUTF();
-				JOptionPane.showMessageDialog(null, Description);
+				
 
 			}
 			if (cmd.compareToIgnoreCase("end") == 0) {
