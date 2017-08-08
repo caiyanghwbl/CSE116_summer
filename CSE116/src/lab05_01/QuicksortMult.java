@@ -37,7 +37,7 @@ public class QuicksortMult extends Thread{
 		}
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		double ArrayToBeSorted[] = new double[10000];
 		for (int i = 0; i < 10000; ++i)
 		{
@@ -52,6 +52,7 @@ public class QuicksortMult extends Thread{
 		low.start();
 		QuicksortMult high = new QuicksortMult(ArrayToBeSorted, length/2+1, length-1);
 		high.start();
+		high.join();
 		
 		
 		long elapsed = System.nanoTime() - time1;
