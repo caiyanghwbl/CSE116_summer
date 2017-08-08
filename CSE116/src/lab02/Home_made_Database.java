@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 
 public class Home_made_Database {
 	final private static int MAX_RECORD_NUMBER = 20;
-	final private static int RECORD_LENGTH = 73;
+	final private static int RECORD_LENGTH = 71;
 	static String idinput;
 	static String player_name;
 	static String team_name = "";
@@ -29,7 +29,7 @@ public class Home_made_Database {
 			store.writeUTF(Dummy); // Fill file with dummy records.
 		}
 		String Description = "";
-		int recLocation = 0;
+//		int recLocation = 0;
 		String where = "0";
 		String cmd = "start";
 		boolean quit = false;
@@ -101,7 +101,7 @@ public class Home_made_Database {
 
 
 				String record = idnum1 + player_name1 + team_name1 + skill_level1 + date1;
-				store.seek(RECORD_LENGTH * (recLocation - 1));
+				store.seek((RECORD_LENGTH + 2) * (idnum - 1));
 				store.writeUTF(record);
 			}
 
@@ -111,7 +111,7 @@ public class Home_made_Database {
 					try {
 					where = JOptionPane.showInputDialog(null, "Enter a record number:");
 					idnum = Integer.parseInt(idinput);
-					store.seek(RECORD_LENGTH * (idnum - 1));
+					store.seek((RECORD_LENGTH + 2) * (idnum - 1));
 					Description = store.readUTF();
 					JOptionPane.showMessageDialog(null, Description);
 					} catch (NumberFormatException ex) {
