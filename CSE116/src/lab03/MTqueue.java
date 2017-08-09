@@ -1,6 +1,6 @@
 import java.util.concurrent.Semaphore;
 
-public class MTQueue 
+public class MTqueue 
 {
 	// allow only one thread at a time to use this queue
 	private Semaphore sem = new Semaphore(1);
@@ -8,7 +8,7 @@ public class MTQueue
 	// define a static queue
 	private java.util.Queue<String> statQ;
 	
-	public MTQueue()
+	public MTqueue()
 	{
 		// create the queue itself
 		statQ = new java.util.LinkedList<String>();
