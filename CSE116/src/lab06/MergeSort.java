@@ -42,8 +42,8 @@ public class MergeSort {
 
 	@SuppressWarnings("static-access")
 	public static void main(String[] args) {
-		double ArrayToBeSorted[] = new double[100];
-		for (int i = 0; i < 100; ++i) {
+		double ArrayToBeSorted[] = new double[10000];
+		for (int i = 0; i < 10000; ++i) {
 			ArrayToBeSorted[i] = Math.random();
 		}
 		int length = ArrayToBeSorted.length;
