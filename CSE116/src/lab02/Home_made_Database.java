@@ -1,11 +1,6 @@
 package lab02;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.util.regex.Pattern;
-
+import java.io.*;
 import javax.swing.JOptionPane;
 
 public class Home_made_Database {
@@ -13,26 +8,26 @@ public class Home_made_Database {
 	final private static int RECORD_LENGTH = 71;
 	static String idinput;
 	static String player_name;
-	static String team_name = "";
+	static String team_name;
 	static String skill_level_input;
-	static String date = "";
+	static String date;
 	static int idnum;
 	static int skill_level;
 	static String skill_level1;
 	static String idnum1;
+	static String record;
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
-		File loc = new File("H:\\DataFile.txt");
+		String file;
+		file = JOptionPane.showInputDialog(null, "Please enter a file name(ex: DataFile.txt)");
+		File loc = new File("H:\\" + file + ".txt");
+		@SuppressWarnings("resource")
 		RandomAccessFile store = new RandomAccessFile(loc, "rw");
 		String Dummy = "abcdefghijklmnop";
 		for (int i = 0; i < MAX_RECORD_NUMBER; ++i) {
 			store.writeUTF(Dummy); // Fill file with dummy records.
 		}
-		String Description = "";
-//		int recLocation = 0;
-		String where = "0";
 		String cmd = "start";
-		boolean quit = false;
 
 		while (cmd.compareToIgnoreCase("end") != 0) {
 			cmd = JOptionPane.showInputDialog(null, "Please enter a command:");
@@ -54,9 +49,7 @@ public class Home_made_Database {
 						break;
 					}
 				}
-				// assert Description.length() == RECORD_LENGTH;
 
-				
 				player_name = JOptionPane.showInputDialog(null, "Please enter player's name: ");
 				if (player_name == null || player_name == "") {
 					JOptionPane.showMessageDialog(null, "Player's name cannot be null");
@@ -65,14 +58,13 @@ public class Home_made_Database {
 					player_name = player_name.substring(0, 26);
 				}
 				String player_name1 = String.format("%26s", player_name);
-				
-				
+
 				team_name = JOptionPane.showInputDialog(null, "Please enter a team name: ");
 				if (team_name.length() > 26) {
 					team_name = team_name.substring(0, 26);
 				}
 				String team_name1 = String.format("%26s", team_name);
-				
+
 				while (true) {
 					skill_level_input = JOptionPane.showInputDialog(null, "Please enter skill level(0-99): ");
 					try {
@@ -98,35 +90,47 @@ public class Home_made_Database {
 				if (idnum == 0) {
 					idnum = 1;
 				}
-
-
-				String record = idnum1 + player_name1 + team_name1 + skill_level1 + date1;
+				record = idnum1 + player_name1 + team_name1 + skill_level1 + date1;
 				store.seek((RECORD_LENGTH + 2) * (idnum - 1));
 				store.writeUTF(record);
 			}
 
 			if (cmd.compareToIgnoreCase("old") == 0) {
-
 				while (true) {
+					idinput = JOptionPane.showInputDialog(null, "Enter a record number:");
 					try {
-					where = JOptionPane.showInputDialog(null, "Enter a record number:");
-					idnum = Integer.parseInt(idinput);
-					store.seek((RECORD_LENGTH + 2) * (idnum - 1));
-					Description = store.readUTF();
-					JOptionPane.showMessageDialog(null, Description);
+						idnum = Integer.parseInt(idinput);
+
 					} catch (NumberFormatException ex) {
 						idnum = 0;
 					}
+
 					if (idnum < 1 || idnum > 20) {
 						JOptionPane.showMessageDialog(null, "The input must between 1 and 20!");
 					} else {
 						break;
 					}
 				}
-
-				
-
+				if (idnum == 0) {
+					idnum = 1;
+				}
+				while (true) {
+					try {
+						store.seek((RECORD_LENGTH + 2) * (idnum - 1));
+						record = store.readUTF();
+					} catch (EOFException ex) {
+						record = null;
+					}
+					if (record == null) {
+						JOptionPane.showMessageDialog(null, "Record not found!");
+						break;
+					} else {
+						JOptionPane.showMessageDialog(null, record);
+						break;
+					}
+				}
 			}
+
 			if (cmd.compareToIgnoreCase("end") == 0) {
 				JOptionPane.showMessageDialog(null, "Exit successfully!");
 				System.exit(-1);
