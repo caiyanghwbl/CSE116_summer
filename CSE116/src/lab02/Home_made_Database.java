@@ -23,9 +23,9 @@ public class Home_made_Database {
 		File loc = new File("H:\\" + file + ".txt");
 		@SuppressWarnings("resource")
 		RandomAccessFile store = new RandomAccessFile(loc, "rw");
-		String Dummy = "abcdefghijklmnop";
+		String Dummy = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrs";
 		for (int i = 0; i < MAX_RECORD_NUMBER; ++i) {
-			store.writeUTF(Dummy); // Fill file with dummy records.
+			store.writeUTF(Dummy);
 		}
 		String cmd = "start";
 
@@ -96,38 +96,27 @@ public class Home_made_Database {
 			}
 
 			if (cmd.compareToIgnoreCase("old") == 0) {
-				while (true) {
+				try {
 					idinput = JOptionPane.showInputDialog(null, "Enter a record number:");
 					try {
-						idnum = Integer.parseInt(idinput);
-
-					} catch (NumberFormatException ex) {
-						idnum = 0;
+					idnum = Integer.parseInt(idinput);
+					}catch(NumberFormatException ex){
+						JOptionPane.showMessageDialog(null, "Invalid input!");
 					}
-
-					if (idnum < 1 || idnum > 20) {
-						JOptionPane.showMessageDialog(null, "The input must between 1 and 20!");
-					} else {
-						break;
-					}
-				}
-				if (idnum == 0) {
-					idnum = 1;
-				}
-				while (true) {
-					try {
-						store.seek((RECORD_LENGTH + 2) * (idnum - 1));
-						record = store.readUTF();
-					} catch (EOFException ex) {
-						record = null;
-					}
-					if (record == null) {
+					store.seek((RECORD_LENGTH + 2) * (idnum - 1));
+					record = store.readUTF();
+					
+					if(record == null || record == "") {
 						JOptionPane.showMessageDialog(null, "Record not found!");
-						break;
-					} else {
-						JOptionPane.showMessageDialog(null, record);
-						break;
 					}
+					else {
+						JOptionPane.showMessageDialog(null, record);
+					}
+					
+				}catch(IOException ex){
+					JOptionPane.showMessageDialog(null, "Invalid input!");
+					continue;
+					
 				}
 			}
 
