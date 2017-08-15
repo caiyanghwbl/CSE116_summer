@@ -1,53 +1,92 @@
-package lab05_2;
+package lab05_02;
 
 public class treeSort {
-	node root;
-	node currentIndex;
-	node parent;
-	long compareIndex;
+	static Node root;
 	int _size;
-	public treeSort() {
-		root = null;
-	}
-	
+	Node current;
+	Node parent;
+
 	public boolean insert(long value) {
-		compareIndex = root.getValue();
-		if(root == null) {
-			root = new node(value);
-			_size = _size + 1;
+		Node newNode = new Node(value);
+		if (root == null) {
+			root = newNode;
+			_size++;
 			return true;
 		}
-		root = currentIndex;
-		
-		while(true) {
-			parent = root;
-			if(value == currentIndex.value) {
-				return false;
-				currentIndex = currentIndex.left;
-			}
-			
-			else if(value < currentIndex.value) {
-				
+		current = root;
+		parent = null;
+		while (true) {
+			parent = current;
+			if (value <= current.value) {
+				if (value == current.value) {
+//					System.out.println("Duplicate!");
+					return false;
+				}
+				current = current.left;
+				if (current == null) {
+					parent.left = newNode;// left
+					_size++;
+					return true;
+				}
+			} else {
+				current = current.right;
+				if (current == null) {
+					parent.right = newNode;
+					_size++;
+					return true;
+				}
 			}
 		}
-//		else {
-//			return false;
-//		}
 	}
-	
-	public long[] retrieve(){
-		
-		return null;
-		
+
+	public long[] retrieve() {
+		final long[] array = new long[_size];
+		final int[] index = new int[_size];
+		inOrder(root, array, index);
+		return array;
+
 	}
-	
+
 	public boolean isPresent(long value) {
-		return false;
-		
+		if (root == null) {
+			return false;
+		}
+		current = root;
+		parent = null;
+		while (true) {
+			parent = current;
+			if (value <= current.value) {
+				if (value == current.value) {
+					return true;
+				}
+				current = current.left;
+				if (current == null) {
+					return false;
+				}
+			} else {
+				current = current.right;
+				if (current == null) {
+					return false;
+				}
+			}
+		}
 	}
-	
+
+	public static void inOrder(Node node, long[] array, int[] index) {
+		if (node != null) {
+			inOrder(node.left, array, index);
+//			System.out.print(node.value + " "); //临时print测试
+			array[index[0]++] = node.value;
+			inOrder(node.right, array, index);
+		}
+	}
+
+	public static void inOrder() {
+		inOrder(root, null, null);
+	}
+
 	public int getCount() {
-		return 0;
-		
+		return _size;
+
 	}
 }
