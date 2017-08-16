@@ -1,4 +1,4 @@
-package Lab01;
+package Lab01_01;
 
 import java.util.*;
 
@@ -7,6 +7,9 @@ public class Hypotenuse_calculator {
 
 	public static void main(String[] args) throws Exception {
 		boolean quit = false;
+		boolean con = false;
+		String cmd = scanner.next();
+		String choice;
 		int A = 0;
 		int B = 0;
 		while (quit == false) {
@@ -15,7 +18,6 @@ public class Hypotenuse_calculator {
 			System.out.println("C – Calculate");
 			System.out.println("Q – Exit");
 			System.out.println("Please Enter a Command: ");
-			String cmd = scanner.next();
 
 			if (cmd.equalsIgnoreCase("a")) {
 				try {
@@ -50,6 +52,8 @@ public class Hypotenuse_calculator {
 				}
 				A = 0;
 				B = 0;
+				con = true;
+				break;
 			}
 
 			else if (cmd.equalsIgnoreCase("q")) {
@@ -59,6 +63,7 @@ public class Hypotenuse_calculator {
 			}
 
 		}
+
 	}
 
 	public static double hypo(double A, double B) {

@@ -44,12 +44,14 @@ public class QuicksortMult extends Thread{
 			ArrayToBeSorted[i] = Math.random( );
 		}
 		int length = ArrayToBeSorted.length;
+		@SuppressWarnings("unused")
 		Quicksort qs = new Quicksort();
 
 		long time1 = System.nanoTime();
 		
 		QuicksortMult low = new QuicksortMult(ArrayToBeSorted, 1, length/2-1);
 		low.start();
+		low.join();
 		QuicksortMult high = new QuicksortMult(ArrayToBeSorted, length/2+1, length-1);
 		high.start();
 		high.join();

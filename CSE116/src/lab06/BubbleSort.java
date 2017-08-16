@@ -22,15 +22,15 @@ public class BubbleSort {
 	
 	@SuppressWarnings("static-access")
 	public static void main(String[] args) {
-		double ArrayToBeSorted[] = new double[100000];
-		for (int i = 0; i < 100000; ++i) {
+		double ArrayToBeSorted[] = new double[1000000];
+		for (int i = 0; i < 1000000; ++i) {
 			ArrayToBeSorted[i] = Math.random();
 		}
 		BubbleSort bs = new BubbleSort();
 		long time1 = System.nanoTime();
 		bs.sort(ArrayToBeSorted);
 		long elapsed = System.nanoTime() - time1;
-		long result = elapsed / 100000000;
+		long result = elapsed / 1000000;
 		System.out.println("Elapsed time: " + result + " milliseconds");
 	}
 }

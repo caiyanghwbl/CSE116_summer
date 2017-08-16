@@ -16,8 +16,8 @@ public class InsertionSort {
 
 	@SuppressWarnings("static-access")
 	public static void main(String[] args) {
-		double ArrayToBeSorted[] = new double[100000];
-		for (int i = 0; i < 100000; ++i) {
+		double ArrayToBeSorted[] = new double[1000000];
+		for (int i = 0; i < 1000000; ++i) {
 			ArrayToBeSorted[i] = Math.random();
 		}
 		InsertionSort is = new InsertionSort();
